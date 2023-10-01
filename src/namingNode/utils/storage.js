@@ -31,6 +31,11 @@ module.exports = {
 
     storageMap.set(key, storageNodeIps);
   },
+  exists : (name) => {
+    const key = hashName(name);
+
+    return storageMap.has(key);
+  },
   testSave : () => {
     storageMap.set(hashName('test'), ['0.0.1.1','0.0.2.1']);
   }

@@ -1,4 +1,5 @@
 const fs = require('fs').promises; 
+const multer = require('multer');
 const path = require('path');
 const DIRECTORY_PATH = path.join(__dirname, '../filesStorage');
 

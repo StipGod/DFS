@@ -1,13 +1,37 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 
 const findController = require('./controllers/findController');
 const resourceController = require('./controllers/resourceController');
 
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './filesStorage/');
+  },
+  filename: (req, file, cb) => {
+    const filePath = path.join('./filesStorage/', file.originalname);
+    
+    if (req.method === 'PUT') {
+      return cb(null, file.originalname);
+    }
+    
+    fs.access(filePath, fs.constants.F_OK, (err) => {
+      if (!err) {
+        return cb(new Error('File with this name already exists'));
+      }
+      cb(null, file.originalname);
+    });
+  }
+});
+
 function serve(port, host, config) {
   const app = express();
-  app.use(bodyParser.json());
+  const upload = multer({ storage: storage });
 
+  app.use(bodyParser.json());
   app.use((req, res, next) => {
     req.config = config; 
 
@@ -15,8 +39,8 @@ function serve(port, host, config) {
   });
 
   app.get('/find', findController.find);
-  app.post('/resource',resourceController.createResource);
-  app.put('/resource',resourceController.updateResource);
+  app.post('/resource', upload.single('file'), resourceController.createResource);
+  app.put('/resource', upload.single('file'), resourceController.updateResource);
 
   app.listen(port, () => {
     console.log(`Naming Node on http://${host}:${port}`);

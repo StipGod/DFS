@@ -43,7 +43,7 @@ function serve(port, host, config) {
   app.put('/resource', upload.single('file'), resourceController.updateResource);
 
   app.listen(port, () => {
-    console.log(`Naming Node on http://${host}:${port}`);
+    console.log(`DataNode on http://${host}:${port}`);
   });
 }
 

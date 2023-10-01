@@ -10,7 +10,7 @@ module.exports = {
       const fileName = req.query.fileName; 
 
       if(!fileName){
-        throw new Error('fileName is required');
+        return res.status(400).json({ error: 'fileName is required' });
       }
 
       const storageNodeIps = storage.find(fileName);

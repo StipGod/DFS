@@ -14,10 +14,8 @@ async function main() {
   const configContent = await fs.readFile(configPath, 'utf-8');
   const config = JSON.parse(configContent);
 
-  const storageNodes = config.storageNodes;
-
-  startup(storageNodes);
-  serve(port,host);
+  startup(config);
+  serve(port,host,config);
 }main().catch((error) => {
   console.error(error);
   process.exitCode = 1;

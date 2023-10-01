@@ -4,9 +4,15 @@ const bodyParser = require('body-parser');
 const findController = require('./controllers/findController');
 const resourceController = require('./controllers/resourceController');
 
-function serve(port, host) {
+function serve(port, host, config) {
   const app = express();
   app.use(bodyParser.json());
+
+  app.use((req, res, next) => {
+    req.config = config; 
+
+    next();
+  });
 
   app.get('/find', findController.find);
   app.post('/resource',resourceController.createResource);

@@ -7,14 +7,14 @@ module.exports = {
       storage.testSave();
       // only for test 
 
-      const fileName = req.query.fileName; 
+      const fileName = req.body.fileName; 
 
       if(!fileName){
         return res.status(400).json({ error: 'fileName is required' });
       }
 
       const storageNodeIps = storage.find(fileName);
-
+      
       res.json({
         ips : storageNodeIps
       });

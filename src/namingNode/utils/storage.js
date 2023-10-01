@@ -9,14 +9,30 @@ function hashName(name) {
 module.exports = {
   find : (name) => {
     const key = hashName(name);
-    return storageMap.get(key);
+
+    const storageNodeIps = storageMap.get(key);
+
+    if (!storageNodeIps) {
+      throw new Error('File not found');
+    }
+
+    return storageNodeIps;
   },
-  save : (name, ip) => {
+  save : (name, storageNodeIps) => {
+    if (!Array.isArray(storageNodeIps) || storageNodeIps.length !== 2) {
+      throw new Error('storageNodeIps must be an array of 2 ips');
+    }
+
     const key = hashName(name);
 
     if (storageMap.has(key)) {
       throw new Error('key Unavailable');
     }
+
+    storageMap.set(key, storageNodeIps);
+  },
+  testSave : () => {
+    storageMap.set(hashName('test'), ['0.0.1.1','0.0.2.1']);
   }
 };
 

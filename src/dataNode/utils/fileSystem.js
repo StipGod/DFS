@@ -1,14 +1,24 @@
 const fs = require('fs').promises; 
 const path = require('path');
-const DIRECTORY_PATH = path.join(__dirname, '../../filesStorage');
-
-console.log(__dirname);
+const DIRECTORY_PATH = path.join(__dirname, '../filesStorage');
 
 module.exports = {
-  find : (fileName) => {
+  find : async (fileName) => {
+    try {
+      const files = await fs.readdir(DIRECTORY_PATH);
+  
+      const foundFile = files.find(file => file === fileName);
 
+      return foundFile ? foundFile : null;
+    } catch (err) {
+      return err; 
+    }
   },
-  save : () => {
-
+  save : async (fileName, data) => {
+    const filePath = path.join(DIRECTORY_PATH, fileName);
+    
+    await fs.writeFile(filePath, data);
+    
+    return filePath;
   }
 };

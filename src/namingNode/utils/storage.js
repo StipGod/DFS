@@ -18,6 +18,7 @@ module.exports = {
 
     return storageNodeIps;
   },
+  
   save : (name, storageNodeIps) => {
     if (!Array.isArray(storageNodeIps) || storageNodeIps.length !== 2) {
       throw new Error('storageNodeIps must be an array of 2 ips');

@@ -10,7 +10,6 @@ function serve(port, host, config) {
 
   app.use((req, res, next) => {
     req.config = config; 
-
     next();
   });
 

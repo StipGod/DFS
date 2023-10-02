@@ -1,3 +1,5 @@
+
+require('express-async-errors')
 const express = require('express');
 const bodyParser = require('body-parser');
 const multer = require('multer');
@@ -27,6 +29,12 @@ const storage = multer.diskStorage({
   }
 });
 
+const errorHandling = (err, req, res, next) => {
+  res.status(500).json({
+    msg: err.message,
+    success: false,
+  });
+};
 function serve(port, host, config) {
   const app = express();
   const upload = multer({ storage: storage });
@@ -41,7 +49,7 @@ function serve(port, host, config) {
   app.get('/find', findController.find);
   app.post('/resource', upload.single('file'), resourceController.createResource);
   app.put('/resource', upload.single('file'), resourceController.updateResource);
-
+  app.use(errorHandling)
   app.listen(port, () => {
     console.log(`DataNode on http://${host}:${port}`);
   });

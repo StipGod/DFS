@@ -6,14 +6,14 @@ const fs = require('fs');
 
 dotenv.config({ path: path.join(__dirname, '../../../.env') });
 
-const fileManager = require('../../grpcConfig/fileManager'); 
+const fileManager = require(path.join(__dirname,'../../grpcConfig/fileManager')); 
 
-const createFile = require('./utils/createFile')
+const createFile = require(path.join(__dirname,'./utils/createFile'))
 
-const fileSystem = require('../utils/fileSystem');
+const fileSystem = require(path.join(__dirname, '../utils/fileSystem'));
 
 async function getServer() {
-  console.info("grpc Consumer service is started...");
+  console.info("grpc DATA NODE Consumer service is started...");
 
 
   var server = new grpc.Server();
@@ -36,7 +36,7 @@ async function getServer() {
           return;
         }
         //CAMBIAR NOMBRE DE ARCHIVO 
-        fs.writeFile(`../filesStorage/a${fileName}`, data, (err) => {
+        fs.writeFile(path.join(__dirname,`../filesStorage/a${fileName}`), data, (err) => {
           if (err) {
               callback(err, { success: false, message: 'Error saving file.' });
           } else {

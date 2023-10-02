@@ -1,19 +1,31 @@
+require('express-async-errors');
+const path = require('path');
+const dotenv = require('dotenv')
 const fileSystem = require('../utils/fileSystem');
+const {uploadFile,createFile} = require('../rpcClient/rpcClient');
+
+
+dotenv.config({ path: path.join(__dirname, '../../../.env') });
+
+
+const {STORAGE_NODE_HOST,NAMING_NODE_HOST,RPC_SECONDARY_PORT,FOLLOWER_NODE_HOST} = process.env;
+
 
 module.exports = {
-  createResource: (req, res) => {
+  createResource: async(req, res) => {
     try {
       if (!req.file) {
         return res.status(400).json({ error: 'File upload failed: No file received' });
       } 
-      console.log(typeof req.file)
-      console.log(req.file)
+      const host = req.query.host;
 
       // aqui mandamos el archivo a la replica
+      await uploadFile(req.file.originalname,host)
 
-
-
-
+      //avisar al nameNode
+      // const storageIps = [STORAGE_NODE_HOST,req.query.host];
+      // createFile(storageIps,NAMING_NODE_HOST,RPC_SECONDARY_PORT);
+      // createFile(storageIps,FOLLOWER_NODE_HOST,RPC_SECONDARY_PORT);
 
 
       return res.status(201).json({ message: 'File uploaded successfully' });
@@ -32,7 +44,7 @@ module.exports = {
       if (!req.file) {
         return res.status(400).json({ error: 'File upload failed: No file received' });
       } 
-      
+
       // aqui mandamos el update de archivo a la replica
 
       return res.status(201).json({ message: 'File uploaded successfully' });

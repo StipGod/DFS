@@ -9,7 +9,7 @@ dotenv.config({ path: path.join(__dirname, '../../.env') });
 
 const {PROTO_PATH} = process.env;
 const packageDefinition = protoLoader.loadSync(
-    PROTO_PATH,
+    path.join(__dirname,PROTO_PATH),
     {keepCase: true,
      longs: String,
      enums: String,

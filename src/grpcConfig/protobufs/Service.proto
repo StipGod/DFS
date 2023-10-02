@@ -1,0 +1,26 @@
+syntax = "proto3";
+message File{
+    string fileName = 1;
+}
+
+message FileChunk{
+    string fileName = 1;
+    bytes chunk = 2;
+}
+
+message StorageIps{
+    repeated string storageIps = 1;
+}
+
+message TransactionResponse{
+    int32 status_code = 1;
+}
+
+message UploadStatus {
+    bool success = 1;
+    string message = 2;
+}
+service FileManager{
+    rpc createFile(StorageIps) returns (TransactionResponse) {}
+    rpc UploadFile(stream FileChunk) returns (UploadStatus){}
+}

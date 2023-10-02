@@ -36,7 +36,7 @@ module.exports = {
   
   updateResource: (req, res) => {
     try {
-      const fileName = req.body.fileName;
+      const fileName = req.query.fileName; 
       const storageNodeIps = storage.find(fileName);
       res.json({ip: storageNodeIps})
 

@@ -7,7 +7,7 @@ module.exports = {
       storage.testSave();
       // only for test 
 
-      const fileName = req.body.fileName; 
+      const fileName = req.query.fileName; 
 
       if(!fileName){
         return res.status(400).json({ error: 'fileName is required' });

@@ -39,6 +39,16 @@ module.exports = {
   },
   testSave : () => {
     storageMap.set(hashName('test'), ['0.0.1.1','0.0.2.1']);
+  },
+
+  setEntireMap: (newMap) => {
+    for (let [key, value] of newMap.entries()) {
+      storageMap.set(key, value);
+    }
+  },
+
+  getEntireMap: () => {
+    return storageMap;
   }
 };
 

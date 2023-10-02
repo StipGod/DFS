@@ -6,8 +6,15 @@ module.exports = {
       if (!req.file) {
         return res.status(400).json({ error: 'File upload failed: No file received' });
       } 
+      console.log(typeof req.file)
+      console.log(req.file)
 
       // aqui mandamos el archivo a la replica
+
+
+
+
+
 
       return res.status(201).json({ message: 'File uploaded successfully' });
        

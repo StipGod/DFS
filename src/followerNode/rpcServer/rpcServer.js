@@ -18,7 +18,7 @@ async function getServer() {
     //METHODS
     createFile,
   });
-  server.bindAsync('0.0.0.0:50052', grpc.ServerCredentials.createInsecure(), () => {
+  server.bindAsync('0.0.0.0:50053', grpc.ServerCredentials.createInsecure(), () => {
     server.start();
   });
 }

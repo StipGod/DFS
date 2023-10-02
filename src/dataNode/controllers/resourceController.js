@@ -8,7 +8,7 @@ const {uploadFile,createFile} = require('../rpcClient/rpcClient');
 dotenv.config({ path: path.join(__dirname, '../../../.env') });
 
 
-const {STORAGE_NODE_HOST,NAMING_NODE_HOST,RPC_SECONDARY_PORT,FOLLOWER_NODE_HOST} = process.env;
+const {STORAGE_NODE_HOST,NAMING_NODE_HOST,RPC_SECONDARY_PORT,FOLLOWER_NODE_HOST,RPC_AUXILIARY_PORT} = process.env;
 
 
 module.exports = {
@@ -20,11 +20,12 @@ module.exports = {
       const host = req.query.host;
 
       // aqui mandamos el archivo a la replica
-      await uploadFile(req.file.originalname,host)
+      uploadFile(req.file.originalname,host)
 
       //avisar al nameNode
-      // const storageIps = [STORAGE_NODE_HOST,req.query.host];
-      // createFile(storageIps,NAMING_NODE_HOST,RPC_SECONDARY_PORT);
+      const storageIps = [STORAGE_NODE_HOST,req.query.host];
+      createFile(storageIps,NAMING_NODE_HOST,RPC_SECONDARY_PORT);
+      createFile(storageIps,NAMING_NODE_HOST,RPC_AUXILIARY_PORT);
       // createFile(storageIps,FOLLOWER_NODE_HOST,RPC_SECONDARY_PORT);
 
 

@@ -1,18 +1,13 @@
 const axios = require('axios'); 
-const os = require('os'); 
-const storage = require('./storage');
+const storage = require('./utils/storage.js');
 
 function startup(config){
-  //Lógica cuando se vuelve a prender el naming node
+  // Logic when the naming node starts up
   console.log('Starting up...');
   const storageNodes = config.storageNodes;
-  console.log('Storage Nodes:',storageNodes);
-  const namingNodes = config.namingNodes;
-  console.log('Naming Nodes:',namingNodes);
-
-  const currentIP = os.networkInterfaces().eth0[0].address; 
-
-  const otherNameNodeIP = namingNodes[0] === currentIP ? namingNodes[1] : namingNodes[0];
+  console.log('Storage Nodes:', storageNodes);
+  const otherNameNodeIP = config.namingNodes;
+  console.log('Other Naming Node IP:', otherNameNodeIP);
 
   axios.get(`http://${otherNameNodeIP}:80/health`) 
     .then(response => {
@@ -29,7 +24,7 @@ function startup(config){
       }
     })
     .catch(error => {
-      console.log('Other NameNode is not alive:', error);
+      //console.log('Other NameNode is not alive:', error);
     });
 }
 

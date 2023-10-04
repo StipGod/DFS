@@ -10,6 +10,7 @@ const configPath = path.join(__dirname, './config.json');
 const port = process.env.STORAGE_NODE_PORT;
 const host = process.env.STORAGE_NODE_HOST;
 
+
 async function main() {
   const configContent = await fs.readFile(configPath, 'utf-8');
   const config = JSON.parse(configContent);

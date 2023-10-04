@@ -18,16 +18,17 @@ module.exports = {
         return res.status(400).json({ error: 'File upload failed: No file received' });
       } 
       const host = req.query.host;
-
+      const fileName = req.file.originalname;
       // aqui mandamos el archivo a la replica
-      uploadFile(req.file.originalname,host)
+      uploadFile(fileName,host)
 
       //avisar al nameNode
       const storageIps = [STORAGE_NODE_HOST,req.query.host];
-      createFile(storageIps,NAMING_NODE_HOST,RPC_SECONDARY_PORT);
-      createFile(storageIps,NAMING_NODE_HOST,RPC_AUXILIARY_PORT);
-      // createFile(storageIps,FOLLOWER_NODE_HOST,RPC_SECONDARY_PORT);
+      createFile(storageIps, fileName, NAMING_NODE_HOST,RPC_SECONDARY_PORT);
 
+      // createFile(storageIps, fileName, NAMING_NODE_HOST,RPC_AUXILIARY_PORT);
+      // createFile(storageIps,FOLLOWER_NODE_HOST,RPC_SECONDARY_PORT);
+      
 
       return res.status(201).json({ message: 'File uploaded successfully' });
        

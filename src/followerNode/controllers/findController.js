@@ -4,7 +4,6 @@ module.exports = {
   find: async (req, res) => {
     try {
       // only for test 
-      storage.testSave();
       // only for test 
 
       const fileName = req.query.fileName; 

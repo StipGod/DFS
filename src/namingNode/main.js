@@ -11,6 +11,7 @@ const port = process.env.NAMING_NODE_PORT;
 const host = process.env.NAMING_NODE_HOST;
 
 async function main() {
+  global.storageMap = new Map();
   const configContent = await fs.readFile(configPath, 'utf-8');
   const config = JSON.parse(configContent);
 

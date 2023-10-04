@@ -10,6 +10,7 @@ message FileChunk{
 
 message StorageIps{
     repeated string storageIps = 1;
+    string fileName = 2;
 }
 
 message TransactionResponse{

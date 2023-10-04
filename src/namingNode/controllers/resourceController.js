@@ -3,10 +3,8 @@ const storage = require('../utils/storage');
 module.exports = {
   createResource: (req, res) => {
     try {
-      // only for test 
-      storage.testSave();
-      // only for test 
       const fileName = req.body.fileName;
+      const storageMap = req.storageMap;
 
       if(storage.exists(fileName)){
         return res.status(400).json({ error: 'fileName already exists' });
@@ -37,6 +35,7 @@ module.exports = {
   updateResource: (req, res) => {
     try {
       const fileName = req.query.fileName; 
+      const storageMap = req.storageMap;
       const storageNodeIps = storage.find(fileName);
       res.json({ip: storageNodeIps})
 

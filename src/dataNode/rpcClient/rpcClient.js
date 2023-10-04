@@ -13,10 +13,10 @@ const fileManager = require(path.join(__dirname,'../../grpcConfig/fileManager'))
 
 const {RPC_PORT , NAMING_NODE_HOST} = process.env
 
-const createFile = (storageIps,HOST,PORT)=>{
+const createFile =  (storageIps, fileName, HOST,PORT)=>{
    const client = new fileManager(`${HOST}:${PORT}`,grpc.credentials.createInsecure());
-   console.log(storageIps)
-   client.createFile({storageIps}, (err, data) => {
+  //  console.log(storageIps)
+   client.createFile({storageIps, fileName}, (err, data) => {
      if(err){
        console.log(err);
       } else {

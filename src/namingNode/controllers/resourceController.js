@@ -3,9 +3,9 @@ const storage = require('../utils/storage');
 module.exports = {
   createResource: (req, res) => {
     try {
-      const fileName = req.body.fileName;
+      const fileName = req.query.fileName;
       const storageMap = req.storageMap;
-
+      console.log(req.query);
       if(storage.exists(fileName)){
         return res.status(400).json({ error: 'fileName already exists' });
       }
@@ -23,7 +23,7 @@ module.exports = {
       const randomSecondIndex = (randomIndex + randomJump) % storageNodes.length;
       const randomIp2 = storageNodes[randomSecondIndex];
 
-      // storage.save(fileName, [randomIp,randomIp2]);
+      storage.save(fileName, [randomIp,randomIp2]);
 
       res.json({ ip: [randomIp,randomIp2] });
     } catch (error) {

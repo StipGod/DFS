@@ -21,7 +21,8 @@ function serve(port, host, config) {
   app.post('/resource', resourceController.createResource);
   app.put('/resource', resourceController.updateResource);
   app.get('/health', systemController.getHealthStatus); 
-  // app.get('/get-current-hashmap', systemController.getCurrentHashMap); 
+  app.get('/get-current-hashmap', systemController.getCurrentHashMap); 
+  app.get('/ls', systemController.getAllFiles);
 
   app.listen(port, () => {
     console.log(`Naming Node on http://${host}:${port}`);

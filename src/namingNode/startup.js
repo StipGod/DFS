@@ -23,7 +23,7 @@ function startup(config){
       }
     })
     .catch(error => {
-      console.log('Other NameNode is not alive:', error);
+      //console.log('Other NameNode is not alive:', error);
     });
 }
 

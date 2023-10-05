@@ -40,18 +40,22 @@ module.exports = {
   
   save: (name, storageNodeIps) => {
     if (!Array.isArray(storageNodeIps) || storageNodeIps.length !== 2) {
-      throw new Error('storageNodeIps must be an array of 2 ips');
+        throw new Error('storageNodeIps must be an array of 2 ips');
     }
 
     const key = hashName(name);
     const storageMap = loadStorageMap();
     if (storageMap[key]) {
-      throw new Error('key Unavailable');
+        throw new Error('key Unavailable');
     }
 
-    storageMap[key] = storageNodeIps;
+    storageMap[key] = {
+        fileName: name,
+        ips: storageNodeIps
+    };
     saveStorageMap(storageMap);
   },
+
   
   exists: (name) => {
     const key = hashName(name);
@@ -69,6 +73,11 @@ module.exports = {
   setEntireMap: (newMap) => {
     const mapToSave = new Map(Object.entries(newMap));
     saveStorageMap(mapToSave);
+  },
+
+  getAllFiles: () => {
+    const storageMap = loadStorageMap();
+    return Object.values(storageMap).map(entry => entry.fileName);
   },
 
   getEntireMap: () => {

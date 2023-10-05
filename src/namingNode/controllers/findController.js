@@ -3,10 +3,6 @@ const storage = require('../utils/storage');
 module.exports = {
   find: async (req, res) => {
     try {
-      // only for test 
-      storage.testSave();
-      // only for test 
-
       const fileName = req.query.fileName; 
 
       if(!fileName){
@@ -16,7 +12,7 @@ module.exports = {
       const storageNodeIps = storage.find(fileName);
       
       res.json({
-        ips : storageNodeIps
+        ips: storageNodeIps
       });
  
     } catch (error) {

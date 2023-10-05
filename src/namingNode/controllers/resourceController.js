@@ -5,7 +5,7 @@ module.exports = {
     try {
       const fileName = req.query.fileName;
       const storageMap = req.storageMap;
-      console.log(req.query);
+      
       if(storage.exists(fileName)){
         return res.status(400).json({ error: 'fileName already exists' });
       }

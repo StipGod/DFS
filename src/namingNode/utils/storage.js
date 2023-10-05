@@ -67,7 +67,8 @@ module.exports = {
   },
 
   setEntireMap: (newMap) => {
-    saveStorageMap(newMap);
+    const mapToSave = new Map(Object.entries(newMap));
+    saveStorageMap(mapToSave);
   },
 
   getEntireMap: () => {

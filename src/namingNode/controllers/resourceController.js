@@ -23,7 +23,8 @@ module.exports = {
       const randomSecondIndex = (randomIndex + randomJump) % storageNodes.length;
       const randomIp2 = storageNodes[randomSecondIndex];
 
-      storage.save(fileName, [randomIp,randomIp2]);
+      //only for test
+      //storage.save(fileName, [randomIp,randomIp2]);
 
       res.json({ ip: [randomIp,randomIp2] });
     } catch (error) {

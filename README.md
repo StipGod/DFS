@@ -13,6 +13,14 @@ Una vez instaladas estas herramientas, haga un fork de este repositorio y corra 
 npm i
 ```
 
+Ahora es necesario crear el archivo `.env` Para esto, ejecute el siguiente comando en la raíz:
+
+```bash
+cp .env.example .env
+```
+
+Para que el sistema pueda funcionar adecuadamente, debe asignar un valor a cada una de estas variables de ambiente.
+
 ## Estructura y puesta en marcha del sistema
 
 Dentro de src, encontrará las dos carpetas principales:

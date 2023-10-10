@@ -23,10 +23,10 @@ Para que el sistema pueda funcionar adecuadamente, debe asignar un valor a cada 
 
 ## Configuración de los nodos
 
-Configuración de los Naming Nodes:
+Configuración de los` NamingNodes`:
 En el archivo de configuración de los Naming Nodes, debe escribir todas las IPs de los diferentes DataNodes que tendrá su sistema.
 
-Configuración de los Data Nodes:
+Configuración de los `DataNodes`:
 En el archivo de configuración de los Data Nodes, debe listar las IPs de los dos NamingNodes que tendrá el sistema.
 
 ## Estructura y puesta en marcha del sistema

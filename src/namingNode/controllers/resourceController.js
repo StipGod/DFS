@@ -3,7 +3,7 @@ const storage = require('../utils/storage');
 module.exports = {
   createResource: (req, res) => {
     try {
-      const fileName = req.body.fileName;
+      const fileName = req.query.fileName;
       const storageMap = req.storageMap;
 
       if(storage.exists(fileName)){

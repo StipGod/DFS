@@ -6,7 +6,7 @@ module.exports = {
   },
 
   getCurrentHashMap: (req, res) => {
-    const storageMap = storage.getAllFiles();
+    const storageMap = storage.getEntireMap();
     res.json(storageMap);
   },
 

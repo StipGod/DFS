@@ -71,13 +71,7 @@ module.exports = {
   },
 
   setEntireMap: (newMap) => {
-    const mapToSave = new Map(Object.entries(newMap));
-    saveStorageMap(mapToSave);
-  },
-
-  getAllFiles: () => {
-    const storageMap = loadStorageMap();
-    return Object.values(storageMap).map(entry => entry.fileName);
+    saveStorageMap(newMap);
   },
 
   getEntireMap: () => {

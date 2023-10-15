@@ -24,10 +24,8 @@ module.exports = {
 
       //avisar al nameNode
       const storageIps = [STORAGE_NODE_HOST,req.query.host];
-      createFile(storageIps, fileName, NAMING_NODE_HOST,RPC_SECONDARY_PORT);
-
-      // createFile(storageIps, fileName, NAMING_NODE_HOST,RPC_AUXILIARY_PORT);
-      // createFile(storageIps,FOLLOWER_NODE_HOST,RPC_SECONDARY_PORT);
+      createFile(storageIps, fileName, NAMING_NODE_HOST, RPC_SECONDARY_PORT);
+      createFile(storageIps,fileName, FOLLOWER_NODE_HOST, RPC_SECONDARY_PORT);
       
 
       return res.status(201).json({ message: 'File uploaded successfully' });

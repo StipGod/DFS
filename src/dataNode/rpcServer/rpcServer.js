@@ -36,7 +36,7 @@ async function getServer() {
           return;
         }
         //CAMBIAR NOMBRE DE ARCHIVO 
-        fs.writeFile(path.join(__dirname,`../filesStorage/a${fileName}`), data, (err) => {
+        fs.writeFile(path.join(__dirname,`../filesStorage/${fileName}`), data, (err) => {
           if (err) {
               callback(err, { success: false, message: 'Error saving file.' });
           } else {

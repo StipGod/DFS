@@ -9,10 +9,10 @@ function startup(config){
   const otherNameNodeIP = config.namingNodes[0];
   console.log('Other Naming Node:', otherNameNodeIP);
 
-  axios.get(`http://${otherNameNodeIP}:80/health`) 
+  axios.get(`http://${otherNameNodeIP}:3000/health`) 
     .then(response => {
       if (response.status === 200) {
-        axios.get(`http://${otherNameNodeIP}:80/get-current-hashmap`)
+        axios.get(`http://${otherNameNodeIP}:3000/get-current-hashmap`)
           .then(hashMapResponse => {
             storage.setEntireMap(hashMapResponse.data);
             console.log('Successfully synchronized hashmap with the other NameNode.');
